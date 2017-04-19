@@ -10,6 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
 /**
  * Created by ziljin on 2017/4/17.
  */
@@ -17,10 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 public class TestController {
     @Autowired
     private ITestService testService;
+
     @RequestMapping(value = "/test",method = RequestMethod.GET)
     public String getUserById(Integer id){
         Test user=testService.getUserById(id);
         String testStr= JSON.toJSONString(user);
         return testStr;
+    }
+
+    @RequestMapping(value = "/getTest", method = RequestMethod.GET)
+    public List<Test> getTest() {
+        List<Test> tests= testService.getTest();
+        String testStr = JSON.toJSONString(tests);
+        return tests;
     }
 }
